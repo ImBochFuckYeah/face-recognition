@@ -50,13 +50,23 @@ def main():
             # Mostrar el frame con los cuadros y textos
             cv2.imshow("Frame", frame)
             
+            # Capturar tecla presionada
+            key = cv2.waitKey(1) & 0xFF
+
+            # Salir del bucle si se presiona la tecla ESC
+            if key == 27:  # 27 es el código ASCII para ESC
+                break
+            
+            # Simular una interrupción en el sistema si se presiona la tecla de espacio
+            elif key == ord(' '):
+                print("Simulación de interrupción del sistema. Presione cualquier tecla para continuar...")
+                cv2.putText(frame, "Interrupcion del sistema", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+                cv2.imshow("Frame", frame)
+                cv2.waitKey(0)  # Pausar hasta que se presione cualquier tecla para continuar
+
             # Añadir un pequeño retraso para mejorar la capacidad de respuesta
             time.sleep(0.02)
             
-            # Salir del bucle si se presiona la tecla ESC
-            k = cv2.waitKey(1)
-            if k == 27:  # 27 es el código ASCII para ESC
-                break
     except Exception as e:
         print(f"Ocurrió un error: {e}")
     finally:
